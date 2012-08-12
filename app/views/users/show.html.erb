@@ -11,14 +11,64 @@
       <%= render 'shared/stats' %>
     </section>
   </aside>
+  
+  
   <div class="span8">
     <%= render 'follow_form' if signed_in? %>
-    <% if @user.microposts.any? %>
-      <h3>Microposts (<%= @user.microposts.count %>)</h3>
-      <ol class="microposts">
-        <%= render @microposts %>
-      </ol>
-      <%= will_paginate @microposts %>
-    <% end %>
+    
+    
+	<ul class="nav nav-tabs">
+		
+    	
+    	<li class="<%= 'active' if params[:tab] == 'tab9' %>"> 
+    		<a href="#tab1" data-toggle="tab">
+    			Auctions
+    				<% if @user.auctions.any? %>
+    					(<%= @user.auctions.count %>)
+    				<% else %> (0)
+    				<% end %>
+    			
+			</a>
+		</li>
+	
+    	
+    	<li class="<%= 'active' if params[:tab] == 'tab1' %>">
+    		<a href="#tab9" data-toggle="tab">
+    			Microposts 
+    				<% if @user.microposts.any? %>
+    					(<%= @user.microposts.count %>)
+    				<% else %> (0)
+    				<% end %>
+    		</a>
+		</li>
+    	
+    	
+	</ul>
+	
+
+	<div class="tab-content">
+	    <div class="<%= if (params[:tab] == 'tab1' || !params[:tab])then 'tab-pane active'  else 'tab-pane' end%>" id="tab1">
+		,,,	
+			<% if @user.auctions.any? %>
+      
+		      <ol class="microposts">
+		        <%= render @auctions %>
+		      </ol>
+		      <%= will_paginate @auctions %>
+		    <% end %>
+	    </div>
+	    <div class="<%= if params[:tab] == 'tab9' then 'tab-pane active'  else 'tab-pane' end%>" id="tab9">
+	       <% if @user.microposts.any? %>
+      
+		      <ol class="microposts">
+		        <%= render @microposts %>
+		      </ol>
+		      <%= will_paginate @microposts %>
+		    <% end %>
+	    </div>
+	    
+	</div>
+  
   </div>
+  
 </div>
