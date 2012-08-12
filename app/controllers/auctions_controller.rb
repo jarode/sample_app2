@@ -25,3 +25,6 @@ class AuctionsController < ApplicationController
       redirect_to root_path if @auction.nil?
     end
 end
+
+
+

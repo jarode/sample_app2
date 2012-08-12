@@ -22,7 +22,6 @@ class User < ActiveRecord::Base
 
   def feed
     Micropost.from_users_followed_by(self)
-    Auction.where("user_id = ?", id) #zle
   end
 
   def following?(other_user)
